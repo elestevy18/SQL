@@ -1,0 +1,82 @@
+-- FIND THE NUMBER OF EMPLOYEES
+
+SELECT COUNT(emp_id)
+FROM EMPLOYEE;
+
+-- FIND THE NUMBER OF FEMALE EMPLOYEES BORN AFTER 1970
+
+SELECT COUNT(emp_id)
+FROM employee
+WHERE sex = 'F' AND birth_date > '1971-01-01';
+
+-- EMPLOYEE SALARY AVERAGE
+SELECT AVG(salary)
+FROM EMPLOYEE
+WHERE sex = 'M';
+
+-- FIND SUM FOR ALL EMPLOYEES
+SELECT SUM(salary)
+FROM employee;
+
+-- FIND OUT HOW MANY MALES AND FEMALE THERE ARE
+
+SELECT COUNT(sex), sex
+FROM employee
+GROUP BY sex;
+
+-- FIND THE TOTAL SALES OF EACH SALESMAN
+SELECT SUM(total_sales), emp_id
+FROM works_with
+GROUP BY emp_id;
+
+-- FIND THE TOTAL EXPENDITURE OF EACH CLIENT
+SELECT SUM(total_sales), client_id
+FROM works_with
+GROUP BY client_id;
+
+-- --------------------------------WILDACARDS------------------
+-- % = ANY CHARACTERS, _ = ONE CHARACTER
+
+-- FIND ANY CLIENT' WHO ARE AN LLC
+             -- // TURNS OUT CLIENT WAS A KEYWORD
+             -- % MEANS ANY NUMBER OF CHARACTERS
+SELECT * FROM client WHERE client_name LIKE '%LLC';
+
+-- FIND ANY BRANCH SUPPLIERS IN THE LABEL BUSINESS;
+SELECT * FROM branch_supplier WHERE client_name  LIKE '%LLC';
+
+-- FIND QUERIES WITH THE WORD LABEL
+SELECT * FROM branch_supplier WHERE client_name  LIKE '%LABEL%';
+
+-- FIND EMPLOYEE BORN IN OCTOBER
+
+SELECT * FROM employee WHERE birth_date LIKE '____-10%';
+
+-- FIND CLIENTS THAT ARE SCHOOLS
+
+SELECT * FROM client WHERE client_name LIKE '%school%';
+
+-- UNIONS
+
+-- FIND AL LIST OF EMPLOYEE AND BRANCH NAME
+
+-- UNION RULES: BOTH TABLES MUST HAVE THE SAME NUMBER OF COLUMNS AND SAME DATA TYPE
+
+SELECT first_name FROM employee UNION
+SELECT branch_name FROM branch UNION
+SELECT client_name FROM client;
+
+-- FIND ALIST OF ALL CLIENTS AND BRANCH SUPPLIEEEEEERS NAMES
+SELECT client_name, branch_ id
+FROM client UNION 
+SELECT supplier_name FROM branch_supplier;
+
+-- FIND A LIST OF ALL THE MONEY THE COMPANY SPENDS OR EARNS
+
+SELECT salary FROM employee UNION 
+SELECT total_sales FROM works_with;
+
+
+
+
+
